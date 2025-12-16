@@ -13,8 +13,8 @@ export function CartItemCard({ item }: CartItemProps) {
   const { product, quantity, calculated_price } = item;
 
   return (
-    <div className="flex gap-4 rounded-lg border border-border/50 bg-card p-4 animate-fade-in">
-      <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-muted">
+    <div className="flex gap-3 rounded-lg border border-border/50 bg-card p-3 sm:gap-4 sm:p-4 animate-fade-in">
+      <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-muted sm:h-20 sm:w-20">
         <img
           src={product.image_url}
           alt={product.name}
@@ -22,32 +22,34 @@ export function CartItemCard({ item }: CartItemProps) {
         />
       </div>
 
-      <div className="flex flex-1 flex-col justify-between">
+      <div className="flex flex-1 flex-col justify-between min-w-0">
         <div>
-          <div className="flex items-start justify-between">
-            <div>
-              <h3 className="font-semibold text-foreground">{product.name}</h3>
-              <p className="text-xs text-muted-foreground">{product.sku}</p>
+          <div className="flex items-start justify-between gap-2">
+            <div className="min-w-0">
+              <h3 className="font-semibold text-foreground text-sm sm:text-base truncate">{product.name}</h3>
+              <p className="text-[10px] text-muted-foreground sm:text-xs">{product.sku}</p>
             </div>
-            <StockBadge stockWHA={product.stock_WHA} stockWHB={product.stock_WHB} />
+            <div className="hidden sm:block">
+              <StockBadge stockWHA={product.stock_WHA} stockWHB={product.stock_WHB} />
+            </div>
           </div>
         </div>
 
-        <div className="mt-2 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="mt-2 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7"
+              className="h-6 w-6 sm:h-7 sm:w-7"
               onClick={() => updateQuantity(product.id, quantity - 1)}
             >
               <Minus className="h-3 w-3" />
             </Button>
-            <span className="w-8 text-center text-sm font-medium">{quantity}</span>
+            <span className="w-6 text-center text-xs font-medium sm:w-8 sm:text-sm">{quantity}</span>
             <Button
               variant="outline"
               size="icon"
-              className="h-7 w-7"
+              className="h-6 w-6 sm:h-7 sm:w-7"
               onClick={() => updateQuantity(product.id, quantity + 1)}
             >
               <Plus className="h-3 w-3" />
@@ -55,7 +57,7 @@ export function CartItemCard({ item }: CartItemProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="h-7 w-7 text-destructive hover:bg-destructive/10 hover:text-destructive"
+              className="h-6 w-6 text-destructive hover:bg-destructive/10 hover:text-destructive sm:h-7 sm:w-7"
               onClick={() => removeFromCart(product.id)}
             >
               <Trash2 className="h-3 w-3" />
@@ -63,10 +65,10 @@ export function CartItemCard({ item }: CartItemProps) {
           </div>
           
           <div className="text-right">
-            <p className="text-xs text-muted-foreground">
+            <p className="text-[10px] text-muted-foreground sm:text-xs">
               ${calculated_price.toFixed(2)} each
             </p>
-            <p className="font-display text-lg font-bold text-foreground">
+            <p className="font-display text-base font-bold text-foreground sm:text-lg">
               ${(calculated_price * quantity).toFixed(2)}
             </p>
           </div>

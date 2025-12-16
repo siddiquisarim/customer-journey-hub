@@ -29,23 +29,23 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-card/80 backdrop-blur-lg">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-14 items-center justify-between px-4 sm:h-16">
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <Building2 className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary sm:h-9 sm:w-9">
+            <Building2 className="h-4 w-4 text-primary-foreground sm:h-5 sm:w-5" />
           </div>
-          <span className="font-display text-xl font-bold text-foreground">
+          <span className="font-display text-lg font-bold text-foreground sm:text-xl">
             ProSupply
           </span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <Link to="/cart">
-            <Button variant="outline" className="relative gap-2">
+            <Button variant="outline" size="sm" className="relative gap-1.5 px-2.5 sm:gap-2 sm:px-4">
               <ShoppingCart className="h-4 w-4" />
-              Cart
+              <span className="hidden sm:inline">Cart</span>
               {itemCount > 0 && (
-                <Badge className="absolute -right-2 -top-2 h-5 w-5 rounded-full p-0 text-xs">
+                <Badge className="absolute -right-1.5 -top-1.5 h-5 w-5 rounded-full p-0 text-xs sm:-right-2 sm:-top-2">
                   {itemCount}
                 </Badge>
               )}
@@ -55,11 +55,11 @@ export function Header() {
           {customer && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-                    <User className="h-4 w-4 text-primary" />
+                <Button variant="ghost" size="sm" className="gap-1.5 px-2 sm:gap-2 sm:px-4">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 sm:h-8 sm:w-8">
+                    <User className="h-3.5 w-3.5 text-primary sm:h-4 sm:w-4" />
                   </div>
-                  <span className="hidden md:inline">{customer.company_name}</span>
+                  <span className="hidden md:inline max-w-[120px] truncate">{customer.company_name}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-64">

@@ -43,21 +43,21 @@ export default function Cart() {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="container py-16">
+        <main className="container px-4 py-12 sm:py-16">
           <div className="mx-auto max-w-md text-center animate-fade-in">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-success/10">
-              <CheckCircle2 className="h-10 w-10 text-success" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-success/10 sm:mb-6 sm:h-20 sm:w-20">
+              <CheckCircle2 className="h-8 w-8 text-success sm:h-10 sm:w-10" />
             </div>
-            <h1 className="font-display text-3xl font-bold text-foreground">
+            <h1 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
               Order Placed!
             </h1>
-            <p className="mt-3 text-muted-foreground">
+            <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">
               Your order has been submitted and is now pending processing.
               You'll receive a confirmation email shortly.
             </p>
             <Button
               size="lg"
-              className="mt-8"
+              className="mt-6 w-full sm:mt-8 sm:w-auto"
               onClick={() => {
                 setOrderPlaced(false);
                 navigate('/');
@@ -75,18 +75,18 @@ export default function Cart() {
     return (
       <div className="min-h-screen bg-background">
         <Header />
-        <main className="container py-16">
+        <main className="container px-4 py-12 sm:py-16">
           <div className="mx-auto max-w-md text-center animate-fade-in">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-              <ShoppingCart className="h-10 w-10 text-muted-foreground" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted sm:mb-6 sm:h-20 sm:w-20">
+              <ShoppingCart className="h-8 w-8 text-muted-foreground sm:h-10 sm:w-10" />
             </div>
-            <h1 className="font-display text-3xl font-bold text-foreground">
+            <h1 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
               Your cart is empty
             </h1>
-            <p className="mt-3 text-muted-foreground">
+            <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">
               Add some products to get started with your order
             </p>
-            <Button asChild size="lg" className="mt-8">
+            <Button asChild size="lg" className="mt-6 w-full sm:mt-8 sm:w-auto">
               <Link to="/">Browse Products</Link>
             </Button>
           </div>
@@ -99,11 +99,12 @@ export default function Cart() {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container py-8">
+      <main className="container px-4 py-4 sm:py-8">
         <Button
           variant="ghost"
           asChild
-          className="mb-6 gap-2 animate-fade-in"
+          size="sm"
+          className="mb-4 gap-1.5 sm:mb-6 sm:gap-2 animate-fade-in"
         >
           <Link to="/">
             <ArrowLeft className="h-4 w-4" />
@@ -111,17 +112,17 @@ export default function Cart() {
           </Link>
         </Button>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-8 lg:grid-cols-3">
           {/* Cart Items */}
           <div className="lg:col-span-2">
-            <div className="mb-4 flex items-center justify-between animate-fade-in">
-              <h1 className="font-display text-2xl font-bold text-foreground">
+            <div className="mb-3 flex items-center justify-between sm:mb-4 animate-fade-in">
+              <h1 className="font-display text-xl font-bold text-foreground sm:text-2xl">
                 Shopping Cart
               </h1>
-              <Badge variant="secondary">{getItemCount()} items</Badge>
+              <Badge variant="secondary" className="text-xs">{getItemCount()} items</Badge>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {items.map((item, index) => (
                 <div key={item.product.id} style={{ animationDelay: `${0.1 + index * 0.05}s` }}>
                   <CartItemCard item={item} />
@@ -132,11 +133,11 @@ export default function Cart() {
 
           {/* Order Summary */}
           <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <Card className="sticky top-24 border-border/50">
-              <CardHeader>
-                <CardTitle className="font-display">Order Summary</CardTitle>
+            <Card className="sticky top-20 border-border/50 sm:top-24">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="font-display text-lg sm:text-xl">Order Summary</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3 p-4 pt-0 sm:space-y-4 sm:p-6 sm:pt-0">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Subtotal</span>
                   <span className="font-medium">${subtotal.toFixed(2)}</span>
@@ -144,12 +145,12 @@ export default function Cart() {
                 
                 {discount > 0 && (
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-success">{discountLabel}</span>
+                    <span className="text-success text-xs sm:text-sm">{discountLabel}</span>
                     <span className="font-medium text-success">Applied</span>
                   </div>
                 )}
 
-                <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center justify-between text-xs sm:text-sm">
                   <span className="text-muted-foreground">Shipping</span>
                   <span className="font-medium">Calculated at checkout</span>
                 </div>
@@ -158,13 +159,13 @@ export default function Cart() {
                 
                 <div className="flex items-center justify-between">
                   <span className="font-semibold">Total</span>
-                  <span className="font-display text-2xl font-bold text-foreground">
+                  <span className="font-display text-xl font-bold text-foreground sm:text-2xl">
                     ${subtotal.toFixed(2)}
                   </span>
                 </div>
 
                 {customer && (
-                  <div className="rounded-lg bg-muted/50 p-3">
+                  <div className="rounded-lg bg-muted/50 p-2.5 sm:p-3">
                     <p className="text-xs text-muted-foreground">
                       <Package className="mr-1 inline h-3 w-3" />
                       Ordering as <span className="font-medium">{customer.company_name}</span>
@@ -188,7 +189,7 @@ export default function Cart() {
                   )}
                 </Button>
                 
-                <p className="text-center text-xs text-muted-foreground">
+                <p className="text-center text-[10px] text-muted-foreground sm:text-xs">
                   By placing this order, you agree to our terms of service
                 </p>
               </CardContent>
