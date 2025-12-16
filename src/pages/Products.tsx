@@ -70,20 +70,20 @@ export default function Products() {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container py-8">
+      <main className="container px-4 py-4 sm:py-8">
         {/* Hero Section */}
-        <div className="mb-8 animate-fade-in">
-          <h1 className="font-display text-3xl font-bold text-foreground md:text-4xl">
+        <div className="mb-4 sm:mb-8 animate-fade-in">
+          <h1 className="font-display text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
             Product Catalog
           </h1>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-1 text-sm text-muted-foreground sm:mt-2 sm:text-base">
             Browse our wholesale inventory with tier-based pricing
           </p>
           
           {customer?.license_status !== 'Approved' && (
-            <div className="mt-4 flex items-center gap-2 rounded-lg border border-warning/30 bg-warning/10 px-4 py-3">
-              <Package className="h-5 w-5 text-warning" />
-              <p className="text-sm text-warning">
+            <div className="mt-3 flex items-start gap-2 rounded-lg border border-warning/30 bg-warning/10 px-3 py-2.5 sm:mt-4 sm:items-center sm:px-4 sm:py-3">
+              <Package className="h-4 w-4 shrink-0 text-warning sm:h-5 sm:w-5" />
+              <p className="text-xs text-warning sm:text-sm">
                 <span className="font-semibold">{restrictedCount} restricted products</span> are hidden. 
                 Get your license approved to access the full catalog.
               </p>
@@ -92,21 +92,21 @@ export default function Products() {
         </div>
 
         {/* Filters */}
-        <div className="mb-6 flex flex-col gap-4 rounded-lg border border-border/50 bg-card p-4 md:flex-row md:items-center animate-fade-in" style={{ animationDelay: '0.1s' }}>
+        <div className="mb-4 flex flex-col gap-3 rounded-lg border border-border/50 bg-card p-3 sm:mb-6 sm:gap-4 sm:p-4 md:flex-row md:items-center animate-fade-in" style={{ animationDelay: '0.1s' }}>
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search products, SKUs..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-10"
+              className="pl-10 h-9 sm:h-10"
             />
           </div>
           
-          <div className="flex flex-wrap gap-3">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="w-[160px]">
-                <Filter className="mr-2 h-4 w-4" />
+              <SelectTrigger className="w-full h-9 text-xs sm:w-[160px] sm:h-10 sm:text-sm">
+                <Filter className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4" />
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
@@ -118,7 +118,7 @@ export default function Products() {
             </Select>
 
             <Select value={stockFilter} onValueChange={setStockFilter}>
-              <SelectTrigger className="w-[160px]">
+              <SelectTrigger className="w-full h-9 text-xs sm:w-[160px] sm:h-10 sm:text-sm">
                 <SelectValue placeholder="Availability" />
               </SelectTrigger>
               <SelectContent>
@@ -131,17 +131,17 @@ export default function Products() {
         </div>
 
         {/* Results count */}
-        <div className="mb-4 flex items-center gap-2 animate-fade-in" style={{ animationDelay: '0.15s' }}>
-          <Badge variant="secondary">{filteredProducts.length} products</Badge>
+        <div className="mb-3 flex items-center gap-2 sm:mb-4 animate-fade-in" style={{ animationDelay: '0.15s' }}>
+          <Badge variant="secondary" className="text-xs">{filteredProducts.length} products</Badge>
           {customer?.license_status === 'Approved' && visibleRestrictedCount > 0 && (
-            <Badge variant="outline" className="gap-1">
+            <Badge variant="outline" className="gap-1 text-xs">
               {visibleRestrictedCount} licensed
             </Badge>
           )}
         </div>
 
         {/* Product Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {filteredProducts.map((product, index) => (
             <div key={product.id} style={{ animationDelay: `${0.2 + index * 0.05}s` }}>
               <ProductCard product={product} />
@@ -150,15 +150,16 @@ export default function Products() {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-16 text-center animate-fade-in">
-            <Package className="h-16 w-16 text-muted-foreground/50" />
-            <h3 className="mt-4 font-display text-xl font-semibold">No products found</h3>
-            <p className="mt-2 text-muted-foreground">
+          <div className="flex flex-col items-center justify-center py-12 text-center sm:py-16 animate-fade-in">
+            <Package className="h-12 w-12 text-muted-foreground/50 sm:h-16 sm:w-16" />
+            <h3 className="mt-3 font-display text-lg font-semibold sm:mt-4 sm:text-xl">No products found</h3>
+            <p className="mt-1.5 text-sm text-muted-foreground sm:mt-2">
               Try adjusting your filters or search terms
             </p>
             <Button
               variant="outline"
-              className="mt-4"
+              size="sm"
+              className="mt-3 sm:mt-4"
               onClick={() => {
                 setSearch('');
                 setCategoryFilter('all');
